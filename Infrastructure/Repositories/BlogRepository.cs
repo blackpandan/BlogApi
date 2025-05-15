@@ -1,9 +1,8 @@
+using BlogApi.Shared.DTOs;
 using BlogApi.Core.Entities;
 using BlogApi.Core.Interfaces;
 using BlogApi.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace BlogApi.Infrastructure.Repositories
 {
@@ -16,14 +15,27 @@ namespace BlogApi.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Blog>> GetAllAsync()
+        public async Task<IEnumerable<BlogDto>> GetAllAsync()
         {
-            throw new NotImplementedException();
+
+            return await _context.Blogs
+                .Select(b => new BlogDto
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    AuthorName = b.Author.Name,
+                    AuthorEmail = b.Author.Email,
+                    PostsCount = b.Posts.Count()
+                })
+                .ToListAsync();
         }
 
         public async Task<Blog?> GetByIdAsync(int id)
         {
-            return await _context.Blogs.Include(b => b.Author).Include(b => b.Posts).FirstOrDefaultAsync(b => b.Id == id);
+            return await _context.Blogs
+                .Include(b => b.Author)
+                .Include(b => b.Posts)
+                .FirstOrDefaultAsync(b => b.Id == id);
         }
 
         public async Task AddAsync(Blog blog)

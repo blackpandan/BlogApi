@@ -1,12 +1,12 @@
+using BlogApi.Shared.DTOs;
 using BlogApi.Core.Entities;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+
 
 namespace BlogApi.Core.Interfaces
 {
     public interface IBlogRepository
     {
-        Task<IEnumerable<Blog>> GetAllAsync();
+        Task<IEnumerable<BlogDto>> GetAllAsync();
         Task<Blog?> GetByIdAsync(int id);
         Task AddAsync(Blog blog);
         Task UpdateAsync(Blog blog);
