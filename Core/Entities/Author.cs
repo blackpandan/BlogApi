@@ -13,7 +13,7 @@ namespace BlogApi.Core.Entities
 
         public virtual ICollection<Blog> Blogs { get; private set; }
 
-        public Author(string name, EmailAddressAttribute email)
+        public Author(string name, string email)
         {
             Name = name;
             Email = email;
