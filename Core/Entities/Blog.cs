@@ -1,5 +1,6 @@
 using System.Collections;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace BlogApi.Core.Entities
 {
     public class Blog
@@ -7,7 +8,9 @@ namespace BlogApi.Core.Entities
         public int Id { get; set; }
         public string Title { get; set; }
         public Uri Url { get; set; }
-        public DateTime DateCreated { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public DateTime DateCreated { get; set; } = DateTime.UtcNow;
         // TODO: add sql trigger to update data on modification 
         // public DateTime LastUpdated { get; set; }
         public int AuthorId { get; set; }
@@ -19,9 +22,12 @@ namespace BlogApi.Core.Entities
         {
             Url = url;
             Title = title;
-            Author = author;
+            Author = author ?? throw new ArgumentNullException(nameof(author));
+            AuthorId = author.Id;
             Posts = [];
         }
+        
+        public Blog() {}
 
      }
 }
