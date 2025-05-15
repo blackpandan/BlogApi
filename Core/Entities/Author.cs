@@ -6,7 +6,9 @@ namespace BlogApi.Core.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public EmailAddressAttribute Email { get; set; }
+
+        [EmailAddress]
+        public string Email { get; set; }
         public DateTime DateCreated { get; set; }
 
         public virtual ICollection<Blog> Blogs { get; private set; }
