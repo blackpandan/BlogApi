@@ -13,6 +13,7 @@ namespace BlogApi.Core.Entities
         public Author Author { get; private set; }
         public Blog Blog { get; private set; }
 
+        public Post() { }
         public Post(string title, string content, Blog blog, Author author)
         {
             Content = content;
