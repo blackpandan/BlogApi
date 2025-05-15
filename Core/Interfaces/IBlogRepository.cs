@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace BlogApi.Core.Interfaces
 {
-    public interface IBlogRepositiory
+    public interface IBlogRepository
     {
         Task<IEnumerable<Blog>> GetAllAsync();
         Task<Blog?> GetByIdAsync(int id);
