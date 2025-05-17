@@ -13,6 +13,7 @@ namespace BlogApi.Presentation.Endpoints
                 var blogs = await repo.GetAllAsync();
                 return blogs is not null ? Results.Ok(blogs) : Results.NotFound();
             });
+            
             endpoints.MapGet("blogs/{id}", async (IBlogRepository repo, int id) =>
             {
                 var blog = await repo.GetByIdAsync(id);

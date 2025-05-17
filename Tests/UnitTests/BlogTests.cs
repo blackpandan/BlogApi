@@ -106,7 +106,7 @@ namespace BlogApi.Tests.UnitTests
                 },
             ];
 
-             mockRepo.Setup(repo => repo.GetAllAsync()).ReturnsAsync(expectedblogs);
+            mockRepo.Setup(repo => repo.GetAllAsync()).ReturnsAsync(expectedblogs);
 
             //ACT
             var handler = new GetAllBlogsHandler(mockRepo.Object);
@@ -128,6 +128,22 @@ namespace BlogApi.Tests.UnitTests
 
             var expectedTitles = new[] { "Test Blog", "Test Blog 2", "Test Blog 3", "Test Blog 4" };
             Assert.Equal(expectedTitles.OrderBy(t => t), titles.OrderBy(t => t));
+        }
+
+        [Fact]
+        public async Task GetAllPostsByABlog_ReturnExpectedPosts()
+        {
+            // Arrange
+            var mockRepo = new Mock<IBlogRepository>();
+            var author = new Author("Faith", "test@gmail.com");
+            var blog = new Blog(new Uri("http://localhost:5000/Test-Blog"),
+                "Test Blog",
+                author
+            );
+
+            IEnumerable<PostDto> expectedPosts = [
+                
+            ] 
         }
     }
 }
